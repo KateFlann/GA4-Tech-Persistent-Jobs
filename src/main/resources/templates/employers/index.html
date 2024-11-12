@@ -12,6 +12,7 @@
     <h2>Employers</h2>
     <ul>
         <li th:each="employer : ${employers}">
+<!--     Query Parameter address link needed?:    <a th: href="'/employers?jobId=' + ${jobId}" th:text="${employer.name}">View Jobs for an Employer</a>  ???-->
             <a th:href="@{'/employers/view/' + ${employer.id}}" th:text="${employer.name}"></a>
         </li>
     </ul>

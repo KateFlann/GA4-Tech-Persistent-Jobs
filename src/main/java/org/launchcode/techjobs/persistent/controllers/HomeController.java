@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.launchcode.techjobs.persistent.models.data.JobRepository;
+import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,24 +25,23 @@ public class HomeController {
     @Autowired
     private EmployerRepository employerRepository;
 
+    @Autowired
+    private JobRepository jobRepository;
 
-//    Similar to what you have done in Part 1, several of the methods in HomeController are missing code
-//    because the class has not yet been wired with the data layer yet.
-//    A user will select an employer when they create a job.
-//    Add the employer data from employerRepository into the form template.
-//    The add job form already includes an employer selection option.
-//    Be sure your variable name for the employer data matches that already used in templates/add.
-//    Checkout templates/add.html. Make a mental note of the name of the variable being used to pass the selected employer id on form submission.
+    @Autowired
+    private SkillRepository skillRepository;
+
+//    List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+//newJob.setSkills(skillObjs);
 
 
 
+
+    //@RequestParam List<Integer> skills
+    //need Integer employerId? jobId?
     @RequestMapping("/")
     public String index(Model model) {
-
-        model.addAttribute("title", "MyJobs");
-//        new lines:
-        model.addAttribute("employers", employerRepository.findAll());
-
+        model.addAttribute("jobs", jobRepository.findAll());
         return "index";
     }
 
@@ -49,25 +50,24 @@ public class HomeController {
     public String displayAddJobForm(Model model) {
 	model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
+//        new lines:
+        model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "add";
     }
 
-    //    In processAddJobForm, add code inside of this method to select the employer object that has been chosen to be affiliated with the new job.
-//    You will need to select the employer using the request parameter you’ve added to the method.  ????
-
 
     @PostMapping("add")
-    public String processAddJobForm(@ModelAttribute @Valid Job newJob, @Valid Employer employer,
-                                       Errors errors, Model model, @RequestParam int employerId) {
-
+    public String processAddJobForm(@ModelAttribute @Valid Job newJob,
+                                       Errors errors, Model model, @RequestParam Integer employerId) {
         if (errors.hasErrors()) {
-	    model.addAttribute("title", "Add Job");
             return "add";
         }
+        Employer employer = employerRepository.findById(employerId).orElse(new Employer());
 
-//        new lines below. I'm just not sure how or why we are supposed to pass in employerID. Had to add @Valid Employer employer to use.
-        employerRepository.save(employer);
-//        jobRepository.save(newJob); ???
+        //        set employer on newJob, job class there is a way to set a new employer
+
+        jobRepository.save(newJob);
 
         return "redirect:";
     }

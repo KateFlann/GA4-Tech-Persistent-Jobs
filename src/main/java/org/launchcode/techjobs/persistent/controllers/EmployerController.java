@@ -18,8 +18,11 @@ public class EmployerController {
     @Autowired
     private EmployerRepository employerRepository;
 
+
+//    added Integer jobId -> though I think this is only if we need an Optional handler to show jobId only if it exists.
+//    Not sure if we need this functionality.
     @GetMapping("/")
-    public String index(@RequestParam (required = false) Model model) {
+    public String index(@RequestParam (required = false) Integer jobId, Model model) {
         model.addAttribute("title", "All Employers");
         model.addAttribute("employers", employerRepository.findAll());
         return "employers/index";
