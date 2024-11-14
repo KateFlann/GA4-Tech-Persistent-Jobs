@@ -50,7 +50,6 @@ public class HomeController {
     public String displayAddJobForm(Model model) {
 	model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
-//        new lines:
         model.addAttribute("employers", employerRepository.findAll());
         model.addAttribute("skills", skillRepository.findAll());
         return "add";
@@ -63,9 +62,15 @@ public class HomeController {
         if (errors.hasErrors()) {
             return "add";
         }
+        //        Alternative to 'Optional'
         Employer employer = employerRepository.findById(employerId).orElse(new Employer());
+        newJob.setEmployer(employer);
 
-        //        set employer on newJob, job class there is a way to set a new employer
+        //       TODO: set employer on newJob, job class there is a way to set a new employer
+//        In processAddJobForm, add code inside of this method to select the employer object
+//        that has been chosen to be affiliated with the new job. -selected-> need to add to new job
+//        You will need to select the employer using the request parameter you’ve added to the method.
+//        An employer only needs to be found and set on the new job object if the form data is validated.
 
         jobRepository.save(newJob);
 

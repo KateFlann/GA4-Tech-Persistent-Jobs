@@ -25,6 +25,11 @@ public class SkillController {
         return "skills/index";
     }
 
+//   Error notice at line 23 above:
+////Cannot invoke "org.springframework.ui.Model.addAttribute(String, Object)" because "model" is null
+////    java.lang.NullPointerException: Cannot invoke "org.springframework.ui.Model.addAttribute(String, Object)" because "model" is null
+////    at org.launchcode.techjobs.persistent.controllers.SkillController.index(SkillController.java:23)
+
 
     @GetMapping("/add")
     public String displayAddSkillForm(Model model) {
