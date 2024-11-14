@@ -3,6 +3,7 @@ package org.launchcode.techjobs.persistent.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
+import org.launchcode.techjobs.persistent.models.Skill;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
@@ -36,9 +37,6 @@ public class HomeController {
 
 
 
-
-    //@RequestParam List<Integer> skills
-    //need Integer employerId? jobId?
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("jobs", jobRepository.findAll());
@@ -56,30 +54,29 @@ public class HomeController {
     }
 
 
+//    added skillID, etc for part 4
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                       Errors errors, Model model, @RequestParam Integer employerId) {
+                                       Errors errors, Model model, @RequestParam Integer employerId, @RequestParam List<Integer> skills) {
         if (errors.hasErrors()) {
             return "add";
         }
         //        Alternative to 'Optional'
         Employer employer = employerRepository.findById(employerId).orElse(new Employer());
         newJob.setEmployer(employer);
-
-        //       TODO: set employer on newJob, job class there is a way to set a new employer
-//        In processAddJobForm, add code inside of this method to select the employer object
-//        that has been chosen to be affiliated with the new job. -selected-> need to add to new job
-//        You will need to select the employer using the request parameter you’ve added to the method.
-//        An employer only needs to be found and set on the new job object if the form data is validated.
-
         jobRepository.save(newJob);
+
+//        Note: As with a job’s employer, you only need to query your database for skills if the job model is valid.
+//        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+//        newJob.setSkills(skillObjs);
 
         return "redirect:";
     }
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
-
+//            Optional job = jobRepository.findById(jobId);
+//            model.addAttribute("job", job);
             return "view";
     }
 

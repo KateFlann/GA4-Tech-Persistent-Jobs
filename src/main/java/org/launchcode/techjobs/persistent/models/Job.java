@@ -13,10 +13,9 @@ public class Job extends AbstractEntity {
     @JoinColumn(name="employer_id")
     private Employer employer;
 
-    private String skills;
-
-//    @ManyToMany(mappedBy = "jobs")
-//    private final List<Skill> skills  = new ArrayList<>();
+//    removed "mappedby"
+    @ManyToMany
+    private final List<Skill> skills  = new ArrayList<>();
 
     public Job() {
     }
@@ -33,21 +32,12 @@ public class Job extends AbstractEntity {
         this.employer = employer;
     }
 
-    public String getSkills() {
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
-        this.skills = skills;
+    public List<Skill> setSkills() {
+        return skills;
     }
-
-
-    //    public List<Skill> getSkills() {
-//        return skills;
-//    }
-//
-//    public List<Skill> setSkills() {
-//        return skills;
-//    }
 
 }

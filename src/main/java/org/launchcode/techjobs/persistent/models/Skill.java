@@ -12,8 +12,8 @@ public class Skill extends AbstractEntity {
 
     public String skills;
 
-//    @ManyToMany(mappedBy = "skills")
-//    private final List<Job> jobs  = new ArrayList<>();
+    @ManyToMany(mappedBy = "skills")
+    private final List<Job> jobs  = new ArrayList<>();
 
     //@NotNull?
     @Size(max = 500, message = "Description too long!")
@@ -29,12 +29,19 @@ public class Skill extends AbstractEntity {
 
     public Skill () {}
 
-//    public List<Job> getJobs() {
-//        return jobs;
-//    }
-//
-//    public List<Job> setJobs() {
-//        return jobs;
-//    }
+    public List<Job> getJobs() {
+        return jobs;
+    }
 
+    public List<Job> setJobs() {
+        return jobs;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
 }
