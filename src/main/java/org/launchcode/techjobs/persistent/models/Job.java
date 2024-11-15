@@ -13,7 +13,7 @@ public class Job extends AbstractEntity {
     @JoinColumn(name="employer_id")
     private Employer employer;
 
-//    removed "mappedby"
+//Adding "(mappedBy = "skills")" or (mappedBy = "jobs") actually broke it... hmm. So... how do we readd Skills to jobs...
     @ManyToMany
     private final List<Skill> skills  = new ArrayList<>();
 

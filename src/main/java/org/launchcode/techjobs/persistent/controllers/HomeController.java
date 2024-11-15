@@ -32,10 +32,6 @@ public class HomeController {
     @Autowired
     private SkillRepository skillRepository;
 
-//    List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
-//newJob.setSkills(skillObjs);
-
-
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -75,8 +71,12 @@ public class HomeController {
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
+
+        Job job = jobRepository.findById(jobId).orElse(new Job());
 //            Optional job = jobRepository.findById(jobId);
-//            model.addAttribute("job", job);
+        model.addAttribute("title", "Job: " + job.getName());
+        model.addAttribute("job", job);
+        model.addAttribute("employers", employerRepository.findAll());
             return "view";
     }
 
