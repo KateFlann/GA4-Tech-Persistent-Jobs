@@ -19,17 +19,10 @@ public class SkillController {
     private SkillRepository skillRepository;
 
     @GetMapping("/")
-    public String index(@RequestParam (required = false) Model model) {
-        model.addAttribute("title", "All Skills");
+    public String index(Model model) {
         model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
     }
-
-//   Error notice at line 23 above:
-////Cannot invoke "org.springframework.ui.Model.addAttribute(String, Object)" because "model" is null
-////    java.lang.NullPointerException: Cannot invoke "org.springframework.ui.Model.addAttribute(String, Object)" because "model" is null
-////    at org.launchcode.techjobs.persistent.controllers.SkillController.index(SkillController.java:23)
-
 
     @GetMapping("/add")
     public String displayAddSkillForm(Model model) {
@@ -59,10 +52,5 @@ public class SkillController {
         } else {
             return "redirect:../";
         }
-
     }
-
-    //At this point, uncomment all remaining methods in TestTaskTwo, if you have not done so already.
-// You’ll need to add an import statement for the new controller to the test file.
-
 }

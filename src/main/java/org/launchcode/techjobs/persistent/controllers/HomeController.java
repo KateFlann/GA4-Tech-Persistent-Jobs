@@ -60,13 +60,15 @@ public class HomeController {
         //        Alternative to 'Optional'
         Employer employer = employerRepository.findById(employerId).orElse(new Employer());
         newJob.setEmployer(employer);
-        jobRepository.save(newJob);
 
-//        Note: As with a job’s employer, you only need to query your database for skills if the job model is valid.
-//        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
-//        newJob.setSkills(skillObjs);
+        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        newJob.setSkills(skillObjs);
+
+         jobRepository.save(newJob);
 
         return "redirect:";
+
+
     }
 
     @GetMapping("view/{jobId}")

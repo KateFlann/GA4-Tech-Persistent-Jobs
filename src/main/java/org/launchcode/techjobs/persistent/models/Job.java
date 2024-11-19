@@ -10,18 +10,20 @@ import java.util.List;
 public class Job extends AbstractEntity {
 
     @ManyToOne
-    @JoinColumn(name="employer_id")
+//    @JoinColumn(name="employer_id")
     private Employer employer;
 
-//Adding "(mappedBy = "skills")" or (mappedBy = "jobs") actually broke it... hmm. So... how do we readd Skills to jobs...
     @ManyToMany
-    private final List<Skill> skills  = new ArrayList<>();
+    private List<Skill> skills;
 
     public Job() {
     }
 
-    public Job(Employer employer) {
+//
+    public Job(Employer employer, List<Skill> skills) {
+        super();
         this.employer = employer;
+        this.skills = skills;
     }
 
     public Employer getEmployer() {
@@ -36,8 +38,13 @@ public class Job extends AbstractEntity {
         return skills;
     }
 
-    public List<Skill> setSkills() {
-        return skills;
+    public void setSkills(List<Skill> skillObjs) {
+        this.skills = skillObjs;
     }
+
+
+//    public void addSkill(Skill skill) {
+//        this.skills.add(skill);
+//    }
 
 }
