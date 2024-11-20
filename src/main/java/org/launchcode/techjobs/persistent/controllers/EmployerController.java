@@ -18,7 +18,6 @@ public class EmployerController {
     @Autowired
     private EmployerRepository employerRepository;
 
-//    remove "Integer jobId" from parameters?
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("employers", employerRepository.findAll());

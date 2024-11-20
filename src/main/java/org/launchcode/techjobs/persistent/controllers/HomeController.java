@@ -50,7 +50,13 @@ public class HomeController {
     }
 
 
-//    added skillID, etc for part 4
+//        Test that is failing "Verifies that HomeController.processAddJobForm queries skillRepository and sets skills properly"
+//    maybe we have to use "Optional"?
+//    We never pass in model.
+
+//    Just tried to add a job without a skill:
+//    "There was an unexpected error (type=Bad Request, status=400). Required parameter 'skills' is not present."
+
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                        Errors errors, Model model, @RequestParam Integer employerId, @RequestParam List<Integer> skills) {
@@ -61,6 +67,9 @@ public class HomeController {
         Employer employer = employerRepository.findById(employerId).orElse(new Employer());
         newJob.setEmployer(employer);
 
+        if (errors.hasErrors()) {
+            return "add";
+        }
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
 
