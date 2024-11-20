@@ -43,8 +43,4 @@ public class Job extends AbstractEntity {
     }
 
 
-//    public void addSkill(Skill skill) {
-//        this.skills.add(skill);
-//    }
-
 }

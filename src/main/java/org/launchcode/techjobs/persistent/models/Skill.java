@@ -11,8 +11,6 @@ import java.util.List;
 @Entity
 public class Skill extends AbstractEntity {
 
-//    public String skills;
-
     @ManyToMany(mappedBy = "skills")
     private final List<Job> jobs  = new ArrayList<>();
 
