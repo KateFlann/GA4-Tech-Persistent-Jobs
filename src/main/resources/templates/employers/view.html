@@ -10,23 +10,15 @@
 <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
 <div class="job-listing">
-    <tr th:each="job : ${employer.jobs}">
-    <td>
-        <p>Job Id: <a th:href="@{'/view/' + ${job.id}}" th:text="${job.id}"></a>
-        </p>
-        <p th:text="${'Name: ' + job.name}"></p>
-        <p>
-        Employer:
-            <a th:href="@{'/employers/view/' + ${job.employer.id}}" th:text="${job.employer.name}"></a>
-        </p>
-        <p>Jobs:<ul th:each="skill : ${job.skills}">
+    <p th:text="${'Name: ' + employer.name}"></p>
+    <p th:text="${'Location: ' + employer.location}"></p>
+    <p>Jobs:</p>
+        <ul th:each="job : ${employer.jobs}">
             <li>
-                <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
+                <a th:href="@{'/view/' + ${job.id}}" th:text="${job.name}"></a>
             </li>
         </ul>
-        </p>
-    </td>
-    </tr>
+
 </div>
 
 
