@@ -3,14 +3,14 @@
 <head th:replace="~{fragments :: head}"></head>
 
 <body class="container  body-content">
-<h1 th:text="${'Job: ' + job.name}">Default Title</h1>
+<h1 th:text="${'Employer: ' + employer.name}">Default Title</h1>
 
 <nav th:replace="~{fragments :: page-header}"></nav>
 
 <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
 <div class="job-listing">
-    <tr th:each="job : ${jobs}">
+    <tr th:each="job : ${employer.jobs}">
     <td>
         <p>Job Id: <a th:href="@{'/view/' + ${job.id}}" th:text="${job.id}"></a>
         </p>
@@ -19,7 +19,7 @@
         Employer:
             <a th:href="@{'/employers/view/' + ${job.employer.id}}" th:text="${job.employer.name}"></a>
         </p>
-        <p>Skills:<ul th:each="skill : ${job.skills}">
+        <p>Jobs:<ul th:each="skill : ${job.skills}">
             <li>
                 <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
             </li>

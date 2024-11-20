@@ -22,7 +22,7 @@ public class Skill extends AbstractEntity {
         public  String getDescription() {
         return description;
     }
-//(@Size(max = 500, message = "Description too long!")
+    //(@Size(max = 500, message = "Description too long!")
         public void setDescription (String description) {
         this.description = description;
     }
@@ -36,14 +36,5 @@ public class Skill extends AbstractEntity {
     public List<Job> setJobs() {
         return jobs;
     }
-
-
-//    public String getSkills() {
-//        return skills;
-//    }
-//
-//    public void setSkills(String skills) {
-//        this.skills = skills;
-//    }
 
 }

@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 public class Employer extends AbstractEntity {
 
-//    removed "(mappedBy = "employer")"
     @OneToMany
     @JoinColumn(name="employer_id")
     private final List<Job> jobs = new ArrayList<>();
